@@ -1,0 +1,8 @@
+name = SP Webform Email Verify 
+description = Checks if a webform e-mail component value is an existent e-mailadress (email_verify module).
+core = 7.x
+package = sprbs
+dependencies[] = sprbs
+dependencies[] = webform
+dependencies[] = webform_validation
+dependencies[] = email_verify

@@ -1,0 +1,30 @@
+<?php
+
+function spwebform_email_verify_webform_validation_validators() {
+  watchdog('spwebform_email_verify', 'test');
+  $validators = array(
+    'webform_email_verify' => array(
+      'name' => t('Webform email verify'),
+      'description' => t('First it checks if the domain/host part of the e-mail exists at all, and reports an error if it does not. Second, it tries to validate the user name too, by sending a HELO/MAIL FROM/RCPT TO chain of commands to the SMTP servers for the found host.'),
+      'component_types' => array(
+        'email',
+      ),
+    ),
+  );
+  return $validators;
+}
+     
+function spwebform_email_verify_webform_validation_validate($validator_name, $items, $components, $rule) {
+  if (!empty($items) && $validator_name === 'webform_email_verify') {
+    $errors = array();
+    foreach ($items as $key => $val) {
+      $result = email_verify_check($val);
+      if ($result !== NULL) {
+        $errors[$key] = t('%item is geen bestaand e-mailadres. Controleer op tikfouten.', array('%item' => $components[$key]['name']));
+        watchdog('spwebform_email_verify', $result, array(), WATCHDOG_NOTICE);
+      }
+    }
+    return $errors;
+    break;
+  }
+}
