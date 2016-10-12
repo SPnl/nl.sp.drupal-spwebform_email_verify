@@ -1,7 +1,6 @@
 <?php
 
 function spwebform_email_verify_webform_validation_validators() {
-  watchdog('spwebform_email_verify', 'test');
   $validators = array(
     'webform_email_verify' => array(
       'name' => t('SP webform email verify'),
