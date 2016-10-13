@@ -19,7 +19,7 @@ function spwebform_email_verify_webform_validation_validate($validator_name, $it
     foreach ($items as $key => $val) {
       $result = _sp_email_verify_check($val);
       if ($result !== NULL) {
-        $errors[$key] = t('%item is geen bestaand e-mailadres. Controleer op tikfouten.', array('%item' => $components[$key]['name']));
+        $errors[$key] = t('%item is geen bestaand e-mailadres. Controleer op tikfouten. Weet je zeker dat het e-mailadres correct is, geef dit dan door aan webmaster@sp.nl', array('%item' => $components[$key]['name']));
         watchdog('spwebform_email_verify', $result, array(), WATCHDOG_NOTICE);
       }
     }
