@@ -129,7 +129,8 @@ function _sp_email_verify_check($mail) {
        * Custom modification, added Protocol error to accept email@online.nl adresses.
        * Thomas de Graaff
        */
-      preg_match("/Protocol error/", $to) ||
+      preg_match("/Protocol error/", $to) || // Allow online.nl
+      preg_match("/reylisted/", $to) || // Allow servers that use greylisting.
 
       // Any 4xx error also means we couldn't really check except 450, which is
       // explcitely a non-existing mailbox: 450 = "Requested mail action not
