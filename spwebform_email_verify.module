@@ -47,7 +47,7 @@ function _sp_email_verify_check($mail) {
   $host = drupal_substr(strchr($mail, '@'), 1);
 
   // Let's see if we can find anything about this host in the DNS.
-  if (!checkdnsrr($host . '.', 'ANY')) {
+  if (!checkdnsrr($host . '.', 'MX') && !checkdnsrr($host . '.', 'ANY')) {
     return t('%host is not a valid email host. Please check the spelling and try again.', array('%host' => "$host"));
   }
 
@@ -145,7 +145,7 @@ function _sp_email_verify_check($mail) {
     watchdog('spwebform_email_verify', 'Rejected email address: @mail. Reason: @to', array('@mail' => $mail, '@to' => $to));
     $params = array('to' => $to, 'mail' => $mail);
     $language = language_default();
-    drupal_mail('spwebform_email_verify', 'spwebform_email_verify_error', 'tdgraaff@sp.nl', $language, $params, NULL, TRUE);
+    drupal_mail('spwebform_email_verify', 'spwebform_email_verify_error', 'webmaster@sp.nl', $language, $params, NULL, TRUE);
     return t('%mail is not a valid email address. Please check the spelling and try again or contact us for clarification.', array('%mail' => "$mail"));
   }
 
