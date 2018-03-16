@@ -46,6 +46,19 @@ function _sp_email_verify_check($mail) {
 
   $host = drupal_substr(strchr($mail, '@'), 1);
 
+  // Exclude domains from check.
+  if (in_array($host, array(
+    'hotmail.com',
+    'hotmail.nl',
+    'outlook.com',
+    'live.nl',
+    'live.com',
+    'msn.com ',
+  ))) {
+    watchdog('spwebform_email_verify', 'Skipped check for Microsoft host: @host', array('@host' => $host));
+    return;
+  }
+
   // Let's see if we can find anything about this host in the DNS.
   if (!checkdnsrr($host . '.', 'MX') && !checkdnsrr($host . '.', 'ANY')) {
     $params = array('to' => 'Not a valid host.', 'mail' => $mail);
