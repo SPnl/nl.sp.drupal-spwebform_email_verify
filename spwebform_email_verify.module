@@ -24,7 +24,6 @@ function spwebform_email_verify_webform_validation_validate($validator_name, $it
       }
     }
     return $errors;
-    break;
   }
 }
 
