@@ -97,7 +97,7 @@ function _sp_email_verify_check($mail) {
       // aol.com for instance).
       // Be on the safe side and accept the address, at least it has a valid
       // domain part.
-      watchdog('spwebform_email_verify', 'Could not verify email address at host @host: @out', array('@host' => $host, '@out' => $out));
+      watchdog('spwebform_email_verify', 'Could not verify email address (' . $mail . ')at host @host: @out', array('@host' => $host, '@out' => $out));
       return;
     }
   }
@@ -131,7 +131,7 @@ function _sp_email_verify_check($mail) {
   if (!preg_match("/^250/", $from)) {
     // Again, something went wrong before we could really test the address.
     // Be on the safe side and accept it.
-    watchdog('spwebform_email_verify', 'Could not verify email address at host @host: @from', array('@host' => $host, '@from' => $from));
+    watchdog('spwebform_email_verify', 'Could not verify email address (' . $mail . ') at host @host: @from', array('@host' => $host, '@from' => $from));
     return;
   }
 
@@ -152,7 +152,7 @@ function _sp_email_verify_check($mail) {
       // taken: mailbox unavailable".
       preg_match("/^4/", $to) && !preg_match("/^450/", $to)) {
     // In those cases, accept the email, but log a warning.
-    watchdog('spwebform_email_verify', 'Could not verify email address at host @host: @to', array('@host' => $host, '@to' => $to));
+    watchdog('spwebform_email_verify', 'Could not verify email address (' . $mail . ') at host @host: @to', array('@host' => $host, '@to' => $to));
     return;
   }
 
