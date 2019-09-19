@@ -47,6 +47,7 @@ function _sp_email_verify_check($mail) {
 
   // Exclude domains from check.
   if (in_array($host, array(
+    'familiemanheim.nl',
     'hotmail.com',
     'hotmail.nl',
     'outlook.com',
